@@ -1,0 +1,40 @@
+# lib/granite
+
+# Dependencies:
+# ``functions`` file
+# ``DEST``, ``DATA_DIR``, ``STACK_USER`` must be defined
+
+# ``stack.sh`` calls the entry points in this order:
+# install_granite
+
+XTRACE=$(set +o | grep xtrace)
+set +o xtrace
+
+
+GRANITE_DIR=$DEST/granite
+GRANITE_REPO=${GRANITE_REPO:-https://github.com/zulcss/nova-compute-flex}
+GRANITE_BRANCH=${GRANITE_BRANCH:-master}
+
+PYTHON2LXC_REPO=${PYTHON2LXC_REPO:-http://github.com/lxc/python2-lxc}
+PYTHON2LXC_DIR=$DEST/python2-lxc
+
+function install_granite {
+    git_clone $GRANITE_REPO $GRANITE_DIR $GRANITE_BRANCH
+    setup_develop $GRANITE_DIR
+
+    git_clone $PYTHON2LXC_REPO $PYTHON2LXC_DIR $PYTHON2LXC_BRANCH
+    setup_develop $PYTHON2LXC_DIR
+
+    # not sure best way to do this, but our lxc-usernet-manage gets installed
+    # into /usr/local/bin, which is not in the exec_dirs path in 
+    # /etc/nova/rootwrap.conf.  So we just link it into /usr/sbin, which is.
+    sudo ln -s ../local/bin/lxc-usernet-manage /usr/sbin/lxc-usernet-manage
+
+    local rwrapd="/etc/nova/rootwrap.d"
+    [ -d "$rwrapd" ] || sudo mkdir -p "$rwrapd"
+    for f in "$GRANITE_DIR/etc/nova/rootwrap.d/"*.filters; do
+        [ -f "$f" ] && sudo cp "$f" "$rwrapd"
+    done
+}
+
+$MY_XTRACE
