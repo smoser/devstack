@@ -22,8 +22,8 @@ function install_granite {
     git_clone $GRANITE_REPO $GRANITE_DIR $GRANITE_BRANCH
     setup_develop $GRANITE_DIR
 
-    git_clone $LXC_REPO $LXC_DIR
-    setup_develop $LXC_DIR
+    git_clone $PYTHON2LXC_REPO $PYTHON2LXC_DIR $PYTHON2LXC_BRANCH
+    setup_develop $PYTHON2LXC_DIR
 }
 
 $MY_XTRACE
