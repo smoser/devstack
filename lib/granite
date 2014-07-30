@@ -12,7 +12,7 @@ set +o xtrace
 
 
 GRANITE_DIR=$DEST/granite
-GRANITE_REPO=${GRANITE_REPO:-https://github.com/zulcss/granite}
+GRANITE_REPO=${GRANITE_REPO:-https://github.com/zulcss/nova-compute-flex}
 GRANITE_BRANCH=${GRANITE_BRANCH:-master}
 
 PYTHON2LXC_REPO=${PYTHON2LXC_REPO:-http://github.com/lxc/python2-lxc}
