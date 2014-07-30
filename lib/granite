@@ -15,8 +15,8 @@ GRANITE_DIR=$DEST/granite
 GRANITE_REPO=${GRANITE_REPO:-https://github.com/zulcss/granite}
 GRANITE_BRANCH=${GRANITE_BRANCH:-master}
 
-LXC_REPO=${LXC_REPO:-${GIT_BASE}/lxc/python2-lxc}
-LXC_DIR=$DEST/python2-lxc
+PYTHON2LXC_REPO=${PYTHON2LXC_REPO:-http://github.com/lxc/python2-lxc}
+PYTHON2LXC_DIR=$DEST/python2-lxc
 
 function install_granite {
     git_clone $GRANITE_REPO $GRANITE_DIR $GRANITE_BRANCH
