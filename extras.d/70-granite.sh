@@ -23,7 +23,7 @@ if [[ $VIRT_DRIVER == "granite" ]]; then
         echo_summary "Configuring granite"
         if is_ubuntu; then
             install_package python-software-properties
-            sudo add-apt-repository -y ppa:ubuntu-lxc/daily
+            sudo apt-add-repository -y ppa:ubuntu-lxc/daily
             apt_get update
             install_package --force-yes lxc lxc-dev
         fi
