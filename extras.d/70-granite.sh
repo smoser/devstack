@@ -21,19 +21,19 @@ if [[ $VIRT_DRIVER == "granite" ]]; then
         source $TOP_DIR/lib/granite
     elif [[ $2 == "install" ]] ; then
         echo_summary "Configuring granite"
-        if is_ubuntu; then
-            install_package python-software-properties
-            sudo apt-add-repository -y ppa:ubuntu-lxc/daily
-            apt_get update
-            install_package --force-yes lxc lxc-dev
-            name="$(id --name --user)"
-            fname="/etc/lxc/lxc-usernet"
-            for br in ${FLAT_NETWORK_BRIDGE} ${OVS_BRIDGE}; do
-               grep -q "^$name veth $br " $fname && continue
-               echo "$name veth $br 128"
-            done | sudo tee -a "$fname"
-            [ $? -eq 0 ] || echo "WARNING: failed to write to $fname"
-        fi
+#        if is_ubuntu; then
+#            install_package python-software-properties
+#            sudo apt-add-repository -y ppa:ubuntu-lxc/daily
+#            apt_get update
+#            install_package --force-yes lxc lxc-dev
+#            name="$(id --name --user)"
+#            fname="/etc/lxc/lxc-usernet"
+#            for br in ${FLAT_NETWORK_BRIDGE} ${OVS_BRIDGE}; do
+#               grep -q "^$name veth $br " $fname && continue
+#               echo "$name veth $br 128"
+#            done | sudo tee -a "$fname"
+#            [ $? -eq 0 ] || echo "WARNING: failed to write to $fname"
+#        fi
         install_granite
     fi
 fi
