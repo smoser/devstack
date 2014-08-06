@@ -35,7 +35,6 @@ if [[ $VIRT_DRIVER == "granite" ]]; then
             [ $? -eq 0 ] || echo "WARNING: failed to write to $fname"
             sudo cgm create all ubuntu
             sudo cgm chown all $(id -u $name) $(id -g $name)
-			cgm movepid all ubuntu $$
         fi
         install_granite
     fi
