@@ -25,7 +25,8 @@ if [[ $VIRT_DRIVER == "granite" ]]; then
             install_package python-software-properties
             sudo apt-add-repository -y ppa:ubuntu-lxc/daily
             apt_get update
-            install_package --force-yes lxc lxc-dev cgmanager-utils
+            install_package --force-yes lxc lxc-dev cgmanager
+            which cgm || install_package --force-yes cmanager-utils
             name="$(id --name --user)"
             fname="/etc/lxc/lxc-usernet"
             for br in ${FLAT_NETWORK_BRIDGE} ${OVS_BRIDGE}; do
