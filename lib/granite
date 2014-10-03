@@ -25,10 +25,6 @@ function install_granite {
     git_clone $PYTHON2LXC_REPO $PYTHON2LXC_DIR $PYTHON2LXC_BRANCH
     setup_develop $PYTHON2LXC_DIR
 
-    # hack
-    [ -f "$GRANITE_DIR/nova/__init__.py" ] ||
-       echo "# worked around or broken by smoser" > "$GRANITE_DIR/nova/__init__.py"
-
     local rwrapd="/etc/nova/rootwrap.d"
     [ -d "$rwrapd" ] || sudo mkdir -p "$rwrapd"
     for f in "$GRANITE_DIR/etc/nova/rootwrap.d/"*.filters; do
