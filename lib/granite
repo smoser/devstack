@@ -25,6 +25,11 @@ function install_granite {
     git_clone $PYTHON2LXC_REPO $PYTHON2LXC_DIR $PYTHON2LXC_BRANCH
     setup_develop $PYTHON2LXC_DIR
 
+    # not sure best way to do this, but our lxc-usernet-manage gets installed
+    # into /usr/local/bin, which is not in the exec_dirs path in 
+    # /etc/nova/rootwrap.conf.  So we just link it into /usr/sbin, which is.
+    sudo ln -s ../local/bin/lxc-usernet-manage /usr/sbin/lxc-usernet-manage
+
     local rwrapd="/etc/nova/rootwrap.d"
     [ -d "$rwrapd" ] || sudo mkdir -p "$rwrapd"
     for f in "$GRANITE_DIR/etc/nova/rootwrap.d/"*.filters; do
